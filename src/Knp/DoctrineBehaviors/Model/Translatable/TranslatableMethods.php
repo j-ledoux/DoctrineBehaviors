@@ -44,11 +44,15 @@ trait TranslatableMethods
      * Adds new translation.
      *
      * @param Translation $translation The translation
+     * 
+     * @return $this
      */
     public function addTranslation($translation)
     {
         $this->getTranslations()->set($translation->getLocale(), $translation);
         $translation->setTranslatable($this);
+
+        return $this;
     }
 
     /**
@@ -87,9 +91,9 @@ trait TranslatableMethods
             return $translation;
         }
 
-        if ($defaultTranslation = $this->findTranslationByLocale($this->getDefaultLocale(), false)) {
-            return $defaultTranslation;
-        }
+        // if ($defaultTranslation = $this->findTranslationByLocale($this->getDefaultLocale(), false)) {
+        //     return $defaultTranslation;
+        // }
 
         $class       = self::getTranslationClass();
         $translation = new $class();
