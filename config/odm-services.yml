@@ -1,0 +1,20 @@
+parameters:
+    knp.doctrine_behaviors.translatable_listener.class: Knp\DoctrineBehaviors\ODM\Translatable\TranslatableListener
+    knp.doctrine_behaviors.translatable_listener.current_locale_callable.class: Knp\DoctrineBehaviors\ORM\Translatable\CurrentLocaleCallable
+
+services:
+    # Custom listener for ODM
+    knp.doctrine_behaviors.translatable_listener:
+        class:   "%knp.doctrine_behaviors.translatable_listener.class%"
+        public:  false
+        arguments:
+            - "@knp.doctrine_behaviors.translatable_listener.current_locale_callable"
+        tags:
+            - { name: doctrine_mongodb.odm.event_subscriber }
+
+    # Same than ORM
+    knp.doctrine_behaviors.translatable_listener.current_locale_callable:
+        class:   "%knp.doctrine_behaviors.translatable_listener.current_locale_callable.class%"
+        arguments:
+            - "@service_container" # lazy request resolution
+        public:  false
