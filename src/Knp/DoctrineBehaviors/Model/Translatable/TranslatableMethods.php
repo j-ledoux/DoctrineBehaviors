@@ -44,7 +44,7 @@ trait TranslatableMethods
      * Adds new translation.
      *
      * @param Translation $translation The translation
-     * 
+     *
      * @return $this
      */
     public function addTranslation($translation)
@@ -180,7 +180,11 @@ trait TranslatableMethods
 
         // without index by locale
         $translations = $this->getTranslations()->filter(function($translation) use ($locale) {
-            return $locale === $translation->getLocale();
+            if ($translation) {
+                return $locale === $translation->getLocale();
+            } else {
+                return false;
+            }
         });
 
         if ($translations->count()) {
