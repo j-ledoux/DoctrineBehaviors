@@ -11,8 +11,6 @@
 
 namespace Knp\DoctrineBehaviors\Model\Translatable;
 
-use JMS\Serializer\Annotation as Serializer;
-
 /**
  * Translatable trait.
  *
