@@ -11,6 +11,8 @@
 
 namespace Knp\DoctrineBehaviors\Model\Translatable;
 
+use JMS\Serializer\Annotation as Serializer;
+
 /**
  * Translatable trait.
  *
@@ -21,6 +23,8 @@ trait TranslatableProperties
     /**
      * Will be mapped to translatable entity
      * by TranslatableListener
+     *
+     * @Serializer\Exclude
      */
     private $translations;
 
@@ -28,11 +32,15 @@ trait TranslatableProperties
      * Will be merged with persisted translations on mergeNewTranslations call
      *
      * @see mergeNewTranslations
+     *
+     * @Serializer\Exclude
      */
     private $newTranslations;
 
     /**
      * currentLocale is a non persisted field configured during postLoad event
+     *
+     * @Serializer\Exclude
      */
     private $currentLocale;
 }
